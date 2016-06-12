@@ -12,18 +12,37 @@
       }
 
       .canvas-container {
-        position: relative;
-        width: 100%;
+        /*position: relative;*/
         height: 100%;
+        /*width: 800px;*/
+        width: 100%;
+        text-align:center;
         margin: auto;
         z-index: 10;
         border: 1px solid red;
       }
 
+      .player {
+        float: left;
+        border: 1px dotted red;
+      }
+
+      .computer {
+        float: right;
+        border: 1px dotted red;
+      }
+
+      .canvas {
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px dotted red;
+      }
+
       #game-canvas {
         border: 10px inset red;
         border-radius: 75px;
-        display: block;
+        /*display: block;*/
+        display: inline;
         margin: auto;
       }
 
@@ -96,7 +115,15 @@
   <body>
 
     <div class="canvas-container">
-      <canvas id="game-canvas"></canvas>
+      <div class="player score">
+        Player Score: <span id="player">0</span>
+      </div>
+      <div class="computer score">
+        Computer Score: <span id="computer">0</span>
+      </div>
+      <div class="canvas">
+        <canvas id="game-canvas">Your browser doesn't support canvas.</canvas>
+      </div>
     </div>
     <!-- <div>
       <p style="position: relative; left: 65px">270</p>
@@ -147,7 +174,7 @@
       </div>
     </div>
 
-    <!-- Scoring. Rounded Corners Behavior. Boost for Player ?. CSS Decoration and Sprite action. -->
+    <!-- Pause Game. Reset after scoring. Scoring Maximum === Winner. Rounded Corners Behavior. Boost for Player ?. Canvas Rendering, CSS Decoration and Sprite action. -->
 
     <script src="vector.js"></script>
     <script src="animate.js"></script>

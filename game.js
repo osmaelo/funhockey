@@ -1,33 +1,48 @@
-// This will go last!!!
-
 window.Hockey = window.Hockey || {};
 
-// alert("Hi from game");
 
-StartGame = Hockey.StartGame = document.getElementById("start-game");
-Pause     = Hockey.Pause     = document.getElementById("pause");
+(function(H) {
+  // 'use strict';
+  var enterKey = H.ENTER_KEY = 13;
 
-var ENTER_KEY = 13;
+  // var StartGame         = H.StartGame         = document.getElementById("start-game"),
+      // Pause             = H.Pause             = document.getElementById("pause"),
+      // PlayerScoreSpan   = H.PlayerScoreSpan   = document.getElementById("player"),
+      // ComputerScoreSpan = H.ComputerScoreSpan = document.getElementById("computer");
 
-window.addEventListener("keypress", function(event) {
-  var key               = event.keyCode || event.key || event.which;
-  var pauseIsHidden     = Pause.classList.contains("hidden");
-  var startGameIsHidden = StartGame.classList.contains("hidden");
-  if (key === ENTER_KEY) {
-    if (!startGameIsHidden) {
-      StartGame.classList.add("hidden");
+  var Game = H.Game = {};
 
-      Hockey.Animate.animate.call(window, Hockey.Animate.step);
-      // var gameView = Hockey.gameView(...)
-      console.log("game started");
-    } else if (pauseIsHidden) {
-      Pause.classList.remove("hidden");
-      console.log("Paused!");
-      // Pause game
-    } else if (!pauseIsHidden) {
-      Pause.classList.add("hidden");
-      console.log("Continued!");
-      // Continue game
+  var StartGame         = Game.StartGame         = document.getElementById("start-game"),
+      Pause             = Game.Pause             = document.getElementById("pause"),
+      PlayerScoreSpan   = Game.PlayerScoreSpan   = document.getElementById("player"),
+      ComputerScoreSpan = Game.ComputerScoreSpan = document.getElementById("computer");
+
+  window.addEventListener("keypress", function(event) {
+    var key               = event.keyCode || event.key || event.which;
+    var pauseIsHidden     = Pause.classList.contains("hidden");
+    var startGameIsHidden = StartGame.classList.contains("hidden");
+    if (key === enterKey) {
+      if (!startGameIsHidden) {
+        StartGame.classList.add("hidden");
+
+        H.Animate.animate.call(window, H.Animate.step);
+        // var gameView = H.gameView(...)
+        console.log("game started");
+      } else if (pauseIsHidden) {
+        Pause.classList.remove("hidden");
+        console.log("Paused!");
+        // Pause game
+      } else if (!pauseIsHidden) {
+        Pause.classList.add("hidden");
+        console.log("Continued!");
+        // Continue game
+      }
     }
-  }
-});
+  });
+
+  var updateScore = Game.updateScore = function(element) {
+    var currentScore = Number(element.innerHTML);
+    element.innerHTML = currentScore + 1;
+  };
+
+}(window.Hockey));

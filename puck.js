@@ -11,13 +11,15 @@ window.Hockey = window.Hockey || {};
     // this.color    = "black";
     this.color    = "white";
   };
-
-  var coeffFriction        = Puck.COEFFFRICTION        = 0.003;
-  var wallElasticity       = Puck.WALLELASTICITY       = 0.87;
-  var puckElasticity       = Puck.PUCKELASTICITY       = 1.40;
-  var puckTopSpeed         = Puck.PUCKTOPSPEED         = 10.5;
-  var movingPuckElasticity = Puck.MOVINGPUCKELASTICITY = 1.6;
-  var puckStrikerMomentum  = Puck.PUCKSTRIKERMOMENTUM  = 6.5;
+  var width                = H.Animate.WIDTH,
+      leftGoalPost         = Puck.LEFTGOALPOST         = width/3,
+      rightGoalPost        = Puck.RIGHTGOALPOST        = 2*width/3,
+      coeffFriction        = Puck.COEFFFRICTION        = 0.003,
+      wallElasticity       = Puck.WALLELASTICITY       = 0.87,
+      puckElasticity       = Puck.PUCKELASTICITY       = 1.40,
+      puckTopSpeed         = Puck.PUCKTOPSPEED         = 10.5,
+      movingPuckElasticity = Puck.MOVINGPUCKELASTICITY = 1.6,
+      puckStrikerMomentum  = Puck.PUCKSTRIKERMOMENTUM  = 6.5;
 
   if (H.STRIKERTOPSPEED > puckStrikerMomentum) {
     throw "Puck has to bounce off faster than the striker can travel";
@@ -94,9 +96,9 @@ window.Hockey = window.Hockey || {};
   };
 
   Puck.prototype.puckWallImpact = function(wallElasticity) {
-    var topX = this.position.x + this.radius,
+    var topX    = this.position.x + this.radius,
         bottomX = this.position.x - this.radius,
-        topY = this.position.y + this.radius,
+        topY    = this.position.y + this.radius,
         bottomY = this.position.y - this.radius;
 
     if (bottomX <= 0) {
@@ -106,15 +108,31 @@ window.Hockey = window.Hockey || {};
       this.position.x = H.Animate.WIDTH -  this.radius;
       this.velocity.x = -this.velocity.x * wallElasticity;
     }
-
-    if (topY >= H.Animate.HEIGHT) {
-      // Needs logic for scoring
-      this.position.y = H.Animate.HEIGHT -  this.radius;
-      this.velocity.y = -this.velocity.y * wallElasticity;
-    } else if (bottomY <= 0) {
-      // Needs logic for scoring
-      this.position.y = this.radius;
-      this.velocity.y = -this.velocity.y * wallElasticity;
+    var currentScore;
+    if (bottomX > leftGoalPost && topX < rightGoalPost) {
+      if (bottomY > H.Animate.HEIGHT) {
+        // debugger;
+        this.position.x = 200;
+        this.position.y = 300;
+        // currentScore = Number(ComputerScoreSpan.innerHTML);
+        // ComputerScoreSpan.innerHTML = currentScore + 1;
+        H.Game.updateScore(H.Game.ComputerScoreSpan);
+      } else if (topY < 0) {
+        // debugger;
+        this.position.x = 200;
+        this.position.y = 300;
+        // currentScore = Number(PlayerScoreSpan.innerHTML);
+        // PlayerScoreSpan.innerHTML = currentScore + 1;
+        H.Game.updateScore(H.Game.PlayerScoreSpan);
+      }
+    } else {
+      if (topY >= H.Animate.HEIGHT) {
+        this.position.y = H.Animate.HEIGHT -  this.radius;
+        this.velocity.y = -this.velocity.y * wallElasticity;
+      } else if (bottomY <= 0) {
+        this.position.y = this.radius;
+        this.velocity.y = -this.velocity.y * wallElasticity;
+      }
     }
   };
 
@@ -152,7 +170,7 @@ window.Hockey = window.Hockey || {};
     var newUnitVelocityVector = newVelocityVector.unitVector();
 
     // puck.velocity = newVelocityVector.multiply(puckElasticity);
-    if (newVelocityVector.magnitude() < 0.2) {
+    if (newVelocityVector.magnitude() < 1) {
       puck.velocity = newUnitVelocityVector.multiply(puckStrikerMomentum);
     } else {
       puck.velocity = newVelocityVector.multiply(puckElasticity);
