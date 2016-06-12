@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background: LightBlue;
+        font-family: sans-serif;
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: default;
+      }
+
+      .canvas-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        z-index: 10;
+        border: 1px solid red;
+      }
+
+      #game-canvas {
+        border: 10px inset red;
+        border-radius: 75px;
+        display: block;
+        margin: auto;
+      }
+
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        z-index: 20;
+        border: 1px solid purple;
+      }
+
+      /*.modal h1 {
+        margin: 0;
+        margin-bottom: 30px;
+        font-size: 72px;
+        font-weight: normal;
+        font-family: Impact, sans-serif;
+        color: #fff;
+        text-shadow: 2px 2px 10px #fff;
+        text-transform: uppercase;
+        transform: skewX(-10deg);
+        border: 1px solid purple;
+      }*/
+
+      .container-center {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid blue;
+      }
+
+      .controls tr {
+        border-bottom: 1px dotted #e6e6e6;
+      }
+      .controls tr:first-of-type {
+        border-top: 1px dotted #e6e6e6;
+      }
+      .controls td {
+        padding: 20px 10px;
+      }
+
+      .controls {
+        border-collapse: collapse;
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .instructions {
+        font-size: 20px;
+        font-style: italic;
+      }
+      .instructions strong {
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+    <title>New Game</title>
+  </head>
+  <body>
+
+    <div class="canvas-container">
+      <canvas id="game-canvas"></canvas>
+    </div>
+    <!-- <div>
+      <p style="position: relative; left: 65px">270</p>
+      <p style="position: relative; left: 75px">|</p>
+      <p>180 ------- * ------- 0</p>
+      <p style="position: relative; left: 75px">|</p>
+      <p style="position: relative; left: 65px">90</p>
+    </div> -->
+
+    <div id="start-game" class="modal">
+      <div class="container-center">
+        <h1>Hockey!</h1>
+        <table class="controls">
+          <tr>
+            <td>▲</td>
+            <td>Up</td>
+          </tr>
+          <tr>
+            <td>▼</td>
+            <td>Down</td>
+          </tr>
+          <tr>
+            <td>◀</td>
+            <td>Left</td>
+          </tr>
+          <tr>
+            <td>▶</td>
+            <td>Right</td>
+          </tr>
+          <tr>
+            <td>Space</td>
+            <td>Speed</td>
+          </tr>
+          <tr>
+            <td>Enter</td>
+            <td>Pause</td>
+          </tr>
+        </table>
+        <p class="instructions">Press <strong>Enter</strong> to Start</p>
+        and
+        <p class="instructions">Press <strong>Enter</strong> again to Pause</p>
+      </div>
+    </div>
+
+    <div id="pause" class ="modal hidden">
+      <div class="container-center">
+        <h1>Paused. Press <strong>Enter</strong> to resume.</h1>
+      </div>
+    </div>
+
+    <!-- Scoring. Rounded Corners Behavior. Boost for Player ?. CSS Decoration and Sprite action. -->
+
+    <script src="vector.js"></script>
+    <script src="animate.js"></script>
+    <script src="rink.js"></script>
+    <script src="striker.js"></script>
+    <script src="player.js"></script>
+    <script src="computer.js"></script>
+    <script src="puck.js"></script>
+    <script src="game.js"></script>
+
+  </body>
+</html>
