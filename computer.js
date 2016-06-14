@@ -9,7 +9,7 @@ window.Hockey = window.Hockey || {};
   var Computer = H.Computer = function() {
     this.striker =  new H.Striker(200, 40, 25, "blue");
     // Test Comp 1
-    // this.striker =  new H.Striker(300, 140, 25, "blue");
+    // this.striker =  new H.Striker(25, 275, 25, "blue");
   };
 
   var computer = H.computer = new Computer();

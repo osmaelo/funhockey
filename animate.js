@@ -4,6 +4,9 @@ window.Hockey = window.Hockey || {};
   // 'use strict';
   var Animate = H.Animate = {};
 
+  var gameContinues = H.Animate.gameContinues = true;
+  console.log("gameContinues " + gameContinues);
+
   Animate.WIDTH  = 400;
   Animate.HEIGHT = 600;
 
@@ -15,10 +18,10 @@ window.Hockey = window.Hockey || {};
   var context = Animate.context = canvas.getContext('2d');
 
   var step = Animate.step = function() {
-    update();
+    // console.log(gameContinues);
+    if (gameContinues) { update(); }
     render();
     // Logic for pause here...
-
     animate(step);
   };
 
@@ -34,6 +37,10 @@ window.Hockey = window.Hockey || {};
     H.player.render();
     H.computer.render();
     H.puck.render();
+  };
+
+  var gamePaused = Animate.gamePaused = function() {
+    gameContinues = gameContinues ? false : true;
   };
 
 }(window.Hockey));

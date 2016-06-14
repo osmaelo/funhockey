@@ -24,18 +24,15 @@ window.Hockey = window.Hockey || {};
     if (key === enterKey) {
       if (!startGameIsHidden) {
         StartGame.classList.add("hidden");
-
         H.Animate.animate.call(window, H.Animate.step);
-        // var gameView = H.gameView(...)
-        console.log("game started");
       } else if (pauseIsHidden) {
         Pause.classList.remove("hidden");
-        console.log("Paused!");
         // Pause game
+        H.Animate.gamePaused();
       } else if (!pauseIsHidden) {
         Pause.classList.add("hidden");
-        console.log("Continued!");
         // Continue game
+        H.Animate.gamePaused();
       }
     }
   });

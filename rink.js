@@ -7,6 +7,7 @@ window.Hockey = window.Hockey || {};
   var context = H.Animate.context;
   var width = H.Animate.WIDTH;
   var height = H.Animate.HEIGHT;
+  var rinkRadius = H.Rink.RINKRADIUS = 75;
 
   var renderRink = Rink.renderRink = function() {
     context.fillStyle = "#ccccff";

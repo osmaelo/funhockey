@@ -2,17 +2,20 @@ window.Hockey = window.Hockey || {};
 
 (function(H) {
   // 'use strict';
-  var context = H.Animate.context;
+  var context    = H.Animate.context;
+  // var rinkRadius = H.Rink.RINKRADIUS = 75;
+  var height     = H.Animate.HEIGHT;
+  var width      = H.Animate.WIDTH;
 
   var Puck = H.Puck = function(x, y, xSpeed, ySpeed, radius) {
     this.position = new H.Vector(x, y);
     this.velocity = new H.Vector(xSpeed, ySpeed);
     this.radius   = radius;
-    // this.color    = "black";
+    // this.color = "black";
     this.color    = "white";
   };
-  var width                = H.Animate.WIDTH,
-      leftGoalPost         = Puck.LEFTGOALPOST         = width/3,
+
+  var leftGoalPost         = Puck.LEFTGOALPOST         = width/3,
       rightGoalPost        = Puck.RIGHTGOALPOST        = 2*width/3,
       coeffFriction        = Puck.COEFFFRICTION        = 0.003,
       wallElasticity       = Puck.WALLELASTICITY       = 0.87,
@@ -43,7 +46,7 @@ window.Hockey = window.Hockey || {};
     var collision = false;
     this.puckFriction(coeffFriction);
     collision = this.traverse(striker1, striker2);
-    this.puckWallImpact(wallElasticity);
+    this.puckWallImpact();
     if (collision) { this.strikerCollision(collision); }
   };
 
@@ -95,46 +98,122 @@ window.Hockey = window.Hockey || {};
     return false;
   };
 
-  Puck.prototype.puckWallImpact = function(wallElasticity) {
+  Puck.prototype.puckWallImpact = function() {
     var topX    = this.position.x + this.radius,
         bottomX = this.position.x - this.radius,
         topY    = this.position.y + this.radius,
         bottomY = this.position.y - this.radius;
 
+    // var lowerHalfYDispl = height - rinkRadius,
+    //     rightHalfXDispl = width - rinkRadius,
+    //     leftHalfXDispl  = rinkRadius,
+    //     upperHalfYDispl = rinkRadius;
+    //
+    // var nearCornerLL = bottomX < rinkRadius && topY > lowerHalfYDispl,
+    //     nearCornerLR = topX > rightHalfXDispl && topY > lowerHalfYDispl,
+    //     nearCornerUL = bottomX < rinkRadius && bottomY < rinkRadius,
+    //     nearCornerUR = topX > rightHalfXDispl && bottomY < rinkRadius;
+    //
+    // var cornerLL, cornerLR, cornerUL, cornerUR;
+    //
+    // cornerLL = this.puckCornerImpact(bottomX, topY, leftHalfXDispl, lowerHalfYDispl, nearCornerLL);
+    // cornerLR = this.puckCornerImpact(topX, topY, rightHalfXDispl, lowerHalfYDispl, nearCornerLR);
+    // cornerUL = this.puckCornerImpact(bottomX, bottomY, leftHalfXDispl, upperHalfYDispl, nearCornerUL);
+    // cornerUR = this.puckCornerImpact(topX, bottomY, rightHalfXDispl, upperHalfYDispl, nearCornerUR);
+    //
+    // var reboundCorner = cornerLL || cornerLR || cornerUL || cornerUR;
+    // Until the corner impact gets fixed...
+    this.puckHorizVertImpact(topX, bottomX, topY, bottomY);
+    // if (reboundCorner) {
+    //   this.puckCornerRebound(reboundCorner);
+    // } else {
+    //   this.puckHorizVertImpact(topX, bottomX, topY, bottomY);
+    // }
+  };
+
+  Puck.prototype.puckHorizVertImpact = function(topX, bottomX, topY, bottomY) {
     if (bottomX <= 0) {
       this.position.x = this.radius;
       this.velocity.x = -this.velocity.x * wallElasticity;
-    } else if (topX >= H.Animate.WIDTH) {
-      this.position.x = H.Animate.WIDTH -  this.radius;
+    } else if (topX >= width) {
+      this.position.x = width -  this.radius;
       this.velocity.x = -this.velocity.x * wallElasticity;
     }
-    var currentScore;
-    if (bottomX > leftGoalPost && topX < rightGoalPost) {
-      if (bottomY > H.Animate.HEIGHT) {
-        // debugger;
-        this.position.x = 200;
-        this.position.y = 300;
-        // currentScore = Number(ComputerScoreSpan.innerHTML);
-        // ComputerScoreSpan.innerHTML = currentScore + 1;
-        H.Game.updateScore(H.Game.ComputerScoreSpan);
-      } else if (topY < 0) {
-        // debugger;
-        this.position.x = 200;
-        this.position.y = 300;
-        // currentScore = Number(PlayerScoreSpan.innerHTML);
-        // PlayerScoreSpan.innerHTML = currentScore + 1;
-        H.Game.updateScore(H.Game.PlayerScoreSpan);
-      }
-    } else {
-      if (topY >= H.Animate.HEIGHT) {
-        this.position.y = H.Animate.HEIGHT -  this.radius;
+    // var currentScore;
+    // if (bottomX > leftGoalPost && topX < rightGoalPost) {
+    //   if (bottomY > height) {
+    //     this.position.x = 200;
+    //     this.position.y = 300;
+    //     H.Game.updateScore(H.Game.ComputerScoreSpan);
+    //   } else if (topY < 0) {
+    //     this.position.x = 200;
+    //     this.position.y = 300;
+    //     H.Game.updateScore(H.Game.PlayerScoreSpan);
+    //   }
+    // } else {
+      if (topY >= height) {
+        this.position.y = height -  this.radius;
         this.velocity.y = -this.velocity.y * wallElasticity;
       } else if (bottomY <= 0) {
         this.position.y = this.radius;
         this.velocity.y = -this.velocity.y * wallElasticity;
       }
-    }
+    // }
   };
+
+  // Puck.prototype.puckCornerImpact = function(indeVar, depeVar, xDispl, yDispl, nearCorner) {
+  //   var impact       = false,
+  //       flip         = yDispl > height/2 ? 1 : -1,
+  //       rinkRSquared = Math.pow(rinkRadius, 2),
+  //       variableTerm = Math.pow((indeVar - xDispl), 2),
+  //       completeTerm = (rinkRSquared - variableTerm),
+  //       curve        = flip * Math.pow(completeTerm, 0.5) + yDispl;
+  //   if (flip === -1) {
+  //     if (nearCorner && depeVar < curve) {
+  //       return [xDispl, yDispl];
+  //     }
+  //   } else {
+  //     if (nearCorner && depeVar > curve) {
+  //       return [xDispl, yDispl];
+  //     }
+  //   }
+  //   return impact;
+  // };
+
+  // Puck.prototype.puckCornerRebound = function(corner) {
+  //   var x, y;
+  //   x = corner[0] > width/2 ? width - this.position.x : 0 - this.position.x;
+  //   y = corner[1] > height/2 ? height - this.position.y : 0 - this.position.y;
+  //
+  //   var normalVector = new H.Vector(x, y);
+  //   var tangentVector1 = normalVector.perpendicularVector1();
+  //   var tangentVector2 = normalVector.perpendicularVector2();
+  //
+  //   var tAngle1 = tangentVector1.angle();
+  //   var tAngle2 = tangentVector2.angle();
+  //   var vAngle = this.velocity.angle();
+  //
+  //   var unitNormalVector = normalVector.unitVector();
+  //   var unitTangentVector1 = tangentVector1.unitVector();
+  //   var unitTangentVector2 = tangentVector2.unitVector();
+  //
+  //   var velocityTangent;
+  //   var velocityTangentVector;
+  //
+  //   if (Math.abs(vAngle - tAngle1) < Math.abs(vAngle - tAngle2)) {
+  //     velocityTangent = unitTangentVector2.dot(this.velocity);
+  //     velocityTangentVector = unitTangentVector2.multiply(velocityTangent);
+  //   } else {
+  //     velocityTangent = unitTangentVector1.dot(this.velocity);
+  //     velocityTangentVector = unitTangentVector1.multiply(velocityTangent);
+  //   }
+  //
+  //   var velocityNormal = -Math.abs(unitNormalVector.dot(this.velocity));
+  //   var velocityNormalVector = unitNormalVector.multiply(velocityNormal);
+  //
+  //   var newVelocityVector = velocityNormalVector.add(velocityTangentVector);
+  //   puck.velocity = newVelocityVector.multiply(wallElasticity);
+  // };
 
   Puck.prototype.strikerCollision = function(striker) {
     var x = striker.position.x - this.position.x,
