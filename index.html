@@ -112,28 +112,9 @@
         display: none;
       }
     </style>
-    <title>New Game</title>
+    <title>Fun Hockey!</title>
   </head>
   <body>
-
-    <div class="canvas-container">
-      <div class="player score">
-        Player Score: <span id="player">0</span>
-      </div>
-      <div class="computer score">
-        Computer Score: <span id="computer">0</span>
-      </div>
-      <div class="canvas">
-        <canvas id="game-canvas">Your browser doesn't support canvas.</canvas>
-      </div>
-    </div>
-    <!-- <div>
-      <p style="position: relative; left: 65px">270</p>
-      <p style="position: relative; left: 75px">|</p>
-      <p>180 ------- * ------- 0</p>
-      <p style="position: relative; left: 75px">|</p>
-      <p style="position: relative; left: 65px">90</p>
-    </div> -->
 
     <div id="start-game" class="modal">
       <div class="container-center">
@@ -164,15 +145,28 @@
             <td>Pause</td>
           </tr>
         </table>
-        <p class="instructions">Press <strong>Enter</strong> to Start</p>
+        <p class="instructions">Press <strong>Enter</strong> to Start/Pause</p>
         and
-        <p class="instructions">Press <strong>Enter</strong> again to Pause</p>
+        <p class="instructions">First to <strong>5</strong> points wins</p>
+        <p class="instructions"><strong>Good Luck!</strong></p>
+      </div>
+    </div>
+
+    <div id="game-container" class="canvas-container hidden">
+      <div class="player score">
+        Player Score: <span id="player">0</span>
+      </div>
+      <div class="computer score">
+        Computer Score: <span id="computer">0</span>
+      </div>
+      <div class="canvas">
+        <canvas id="game-canvas">Your browser doesn't support canvas.</canvas>
       </div>
     </div>
 
     <div id="goal-scored" class="modal hidden">
       <div class="container-center">
-        <h1><strong>Score!</strong></h1>
+        <h1><strong>Goal!</strong></h1>
         <p class="instructions">Get ready, puck will start in a random direction.</p>
         <p class="instructions">Another round will start in <strong><span id="timer"></span></strong>s!</p>
       </div>
@@ -180,7 +174,14 @@
 
     <div id="pause" class ="modal hidden">
       <div class="container-center">
-        <h1>Paused. Press <strong>Enter</strong> to resume.</h1>
+        <h2>Paused. Press <strong>Enter</strong> to resume.</h2>
+      </div>
+    </div>
+
+    <div id="victory" class ="modal hidden">
+      <div class="container-center">
+        <h2>Congratulations to <strong><span id="winner"></span></strong> for winning the game!</h2>
+        <p class="instructions">Press <strong>C</strong> for 'continue' to start a new game</p>
       </div>
     </div>
 
