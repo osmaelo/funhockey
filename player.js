@@ -46,4 +46,9 @@ window.Hockey = window.Hockey || {};
     }
   };
 
+  Player.prototype.reset = function() {
+    this.striker.position.x = 200;
+    this.striker.position.y = 560;
+  };
+
 }(window.Hockey));

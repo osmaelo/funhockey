@@ -18,10 +18,8 @@ window.Hockey = window.Hockey || {};
   var context = Animate.context = canvas.getContext('2d');
 
   var step = Animate.step = function() {
-    // console.log(gameContinues);
     if (gameContinues) { update(); }
     render();
-    // Logic for pause here...
     animate(step);
   };
 

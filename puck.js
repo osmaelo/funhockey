@@ -29,9 +29,13 @@ window.Hockey = window.Hockey || {};
   }
 
   // Instantiation of puck should prob go in game.js
-  var puck = H.puck =  new Puck(200, 300, 0, 6, 15);
+  var direction = Math.random() * 2 * Math.PI;
+  var xVel = 7 * Math.cos(direction);
+  var yVel = 7 * Math.sin(direction);
+  var puck = H.puck =  new Puck(200, 300, xVel, yVel, 15);
+  // var puck = H.puck =  new Puck(200, 300, 0, -6, 15);
   // Test Puck 1
-  // var puck = H.puck =  new Puck(60, 150, 0, -0.9, 15);
+  // var puck = H.puck =  new Puck(60, 150, 5, 5, 15);
   // Test Puck 2
   // var puck = H.puck =  new Puck(200, 145, 0, -1, 15);
 
@@ -131,6 +135,14 @@ window.Hockey = window.Hockey || {};
     // }
   };
 
+  Puck.prototype.reset = function() {
+    var direction = Math.random() * 2 * Math.PI;
+    this.position.x = 200;
+    this.position.y = 300;
+    this.velocity.x = 7 * Math.cos(direction);
+    this.velocity.x = 7 * Math.sin(direction);
+  };
+
   Puck.prototype.puckHorizVertImpact = function(topX, bottomX, topY, bottomY) {
     if (bottomX <= 0) {
       this.position.x = this.radius;
@@ -139,18 +151,18 @@ window.Hockey = window.Hockey || {};
       this.position.x = width -  this.radius;
       this.velocity.x = -this.velocity.x * wallElasticity;
     }
-    // var currentScore;
-    // if (bottomX > leftGoalPost && topX < rightGoalPost) {
-    //   if (bottomY > height) {
-    //     this.position.x = 200;
-    //     this.position.y = 300;
-    //     H.Game.updateScore(H.Game.ComputerScoreSpan);
-    //   } else if (topY < 0) {
-    //     this.position.x = 200;
-    //     this.position.y = 300;
-    //     H.Game.updateScore(H.Game.PlayerScoreSpan);
-    //   }
-    // } else {
+
+    if (bottomX > leftGoalPost && topX < rightGoalPost) {
+      if (bottomY > height) {
+        this.position.x = 200;
+        this.position.y = 300;
+        H.Game.updateScore(H.Game.ComputerScoreSpan);
+      } else if (topY < 0) {
+        this.position.x = 200;
+        this.position.y = 300;
+        H.Game.updateScore(H.Game.PlayerScoreSpan);
+      }
+    } else {
       if (topY >= height) {
         this.position.y = height -  this.radius;
         this.velocity.y = -this.velocity.y * wallElasticity;
@@ -158,7 +170,7 @@ window.Hockey = window.Hockey || {};
         this.position.y = this.radius;
         this.velocity.y = -this.velocity.y * wallElasticity;
       }
-    // }
+    }
   };
 
   // Puck.prototype.puckCornerImpact = function(indeVar, depeVar, xDispl, yDispl, nearCorner) {

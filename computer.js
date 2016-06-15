@@ -18,6 +18,11 @@ window.Hockey = window.Hockey || {};
     this.striker.render();
   };
 
+  Computer.prototype.reset = function() {
+    this.striker.position.x = 200;
+    this.striker.position.y = 40;
+  };
+
   Computer.prototype.update = function(puck) {
     var puckPosY         = puck.position.y,
         puckInYLocation4 = puckPosY > 3*rinkLength/4,
