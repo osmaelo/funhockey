@@ -5,7 +5,6 @@ window.Hockey = window.Hockey || {};
   var Animate = H.Animate = {};
 
   var gameContinues = H.Animate.gameContinues = true;
-  console.log("gameContinues " + gameContinues);
 
   Animate.WIDTH  = 400;
   Animate.HEIGHT = 600;
@@ -30,8 +29,13 @@ window.Hockey = window.Hockey || {};
   };
 
   var render = Animate.render = function() {
+    if (gameContinues) {
+      H.Rink.renderRink();
+    } else {
+      H.Rink.renderMagicalRink();
+    }
     // H.Rink.renderRink();
-    H.Rink.renderMagicalRink();
+    // H.Rink.renderMagicalRink();
     H.player.render();
     H.computer.render();
     H.puck.render();

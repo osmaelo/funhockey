@@ -7,7 +7,7 @@ window.Hockey = window.Hockey || {};
   var strikerTopSpeed = H.STRIKERTOPSPEED;
 
   var Computer = H.Computer = function() {
-    this.striker =  new H.Striker(200, 40, 25, "blue");
+    this.striker =  new H.Striker(200, 40, 25, "grey");
     // Test Comp 1
     // this.striker =  new H.Striker(25, 275, 25, "blue");
   };

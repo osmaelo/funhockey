@@ -7,12 +7,11 @@ window.Hockey = window.Hockey || {};
   var height     = H.Animate.HEIGHT;
   var width      = H.Animate.WIDTH;
 
-  var Puck = H.Puck = function(x, y, xSpeed, ySpeed, radius) {
+  var Puck = H.Puck = function(x, y, xSpeed, ySpeed, radius, color) {
     this.position = new H.Vector(x, y);
     this.velocity = new H.Vector(xSpeed, ySpeed);
     this.radius   = radius;
-    // this.color = "black";
-    this.color    = "white";
+    this.color = color;
   };
 
   var leftGoalPost         = Puck.LEFTGOALPOST         = width/3,
@@ -32,7 +31,8 @@ window.Hockey = window.Hockey || {};
   var direction = Math.random() * 2 * Math.PI;
   var xVel = 7 * Math.cos(direction);
   var yVel = 7 * Math.sin(direction);
-  var puck = H.puck =  new Puck(200, 300, xVel, yVel, 15);
+  var puck = H.puck =  new Puck(200, 300, xVel, yVel, 15, "black");
+  // var puck2 = H.puck =  new Puck(200, 300, xVel, yVel, 15, "white");
   // var puck = H.puck =  new Puck(200, 300, 0, -6, 15);
   // Test Puck 1
   // var puck = H.puck =  new Puck(60, 150, 5, 5, 15);

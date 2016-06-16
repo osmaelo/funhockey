@@ -7,7 +7,8 @@ window.Hockey = window.Hockey || {};
   var cKey = H.CKEY = 99;
   var Game = H.Game = {};
 
-  var StartGame         = Game.StartGame         = document.getElementById("start-game"),
+  var TitleBar          = Game.TitleBar          = document.getElementById("title-bar"),
+      StartGame         = Game.StartGame         = document.getElementById("start-game"),
       GameContainer     = Game.GameContainer     = document.getElementById("game-container"),
       Pause             = Game.Pause             = document.getElementById("pause"),
       PlayerScoreSpan   = Game.PlayerScoreSpan   = document.getElementById("player"),
@@ -25,10 +26,10 @@ window.Hockey = window.Hockey || {};
     var pauseIsHidden     = Pause.classList.contains("hidden");
     var victoryIsHidden   = Victory.classList.contains("hidden");
     var startGameIsHidden = StartGame.classList.contains("hidden");
-    console.log(key);
     if (key === enterKey) {
       if (!startGameIsHidden) {
         StartGame.classList.add("hidden");
+        TitleBar.classList.remove("hidden");
         GameContainer.classList.remove("hidden");
         H.Animate.animate.call(window, H.Animate.step);
       } else if (pauseIsHidden && !gameResetting) {
@@ -49,7 +50,7 @@ window.Hockey = window.Hockey || {};
   });
 
   var updateScore = Game.updateScore = function(element) {
-    var currentScore = Number(element.innerHTML);
+    var currentScore  = Number(element.innerHTML);
     element.innerHTML = currentScore + 1;
     if (currentScore === winningScore - 1) {
       gameResetting = true;
