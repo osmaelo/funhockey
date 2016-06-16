@@ -45,6 +45,7 @@ window.Hockey = window.Hockey || {};
       }
     } else if (key === cKey && !victoryIsHidden) {
       Victory.classList.add("hidden");
+      H.Animate.gameFinished();
       H.Animate.gamePaused();
       gameResetting = false;
     }
@@ -74,6 +75,7 @@ window.Hockey = window.Hockey || {};
 
   var startOver = Game.startOver = function() {
     this.resetGamePieces();
+    H.Animate.gameFinished();
     PlayerScoreSpan.innerHTML = "0";
     ComputerScoreSpan.innerHTML = "0";
   };

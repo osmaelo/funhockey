@@ -4,7 +4,8 @@ window.Hockey = window.Hockey || {};
   // 'use strict';
   var Animate = H.Animate = {};
 
-  var gameContinues = H.Animate.gameContinues = true;
+  var gameContinues = H.Animate.gameContinues = true,
+      gameWon       = H.Animate.gameWon       = false;
 
   Animate.WIDTH  = 400;
   Animate.HEIGHT = 600;
@@ -29,10 +30,10 @@ window.Hockey = window.Hockey || {};
   };
 
   var render = Animate.render = function() {
-    if (gameContinues) {
-      H.Rink.renderRink();
-    } else {
+    if (gameWon) {
       H.Rink.renderMagicalRink();
+    } else {
+      H.Rink.renderRink();
     }
     // H.Rink.renderRink();
     // H.Rink.renderMagicalRink();
@@ -43,6 +44,10 @@ window.Hockey = window.Hockey || {};
 
   var gamePaused = Animate.gamePaused = function() {
     gameContinues = gameContinues ? false : true;
+  };
+
+  var gameFinished = Animate.gameFinished = function() {
+    gameWon = gameWon ? false : true;
   };
 
 }(window.Hockey));
