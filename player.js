@@ -9,7 +9,7 @@ window.Hockey = window.Hockey || {};
       down          = H.DOWN = 40;
 
   var Player = H.Player = function() {
-    this.striker =  new H.Striker(200, 560, 25, "grey");
+    this.striker =  new H.Striker(200, 560, 25, "orange");
     // Test
     // this.striker =  new H.Striker(200, 560, 75, "brown");
   };

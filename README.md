@@ -1,6 +1,6 @@
 # Fun Hockey
 
-An Air Hockey inspired game where you control a mallet in an attempt to score on an opponent by passing a puck past the opponent's mallet and into their goal area.
+An Air Hockey inspired game where you control a striker in an attempt to score on an opponent by passing a puck past the opponent's striker and into their goal area.
 
 **Instructions:**
 - **Arrow Keys:** ⬅️ ⬆️ ⬇️ ➡️
@@ -24,5 +24,6 @@ The Game's equipment include:
 ## Future Additions
 - [ ] Keep Track of Auto-Goals, Change score by -1
 - [ ] Start & Stop & Pause Game, Instructions
-- [ ] Customization of Mallets, Board and Puck
-- [ ] Power-Ups for Mallets (i.e. sticky Mallet, Multiple Pucks)
+- [ ] Customization of Strikers, Board and Puck
+- [ ] Power-Ups for Strikers (i.e. sticky Striker, Multiple Pucks)
+- [ ] Sprite Animation

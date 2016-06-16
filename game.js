@@ -8,6 +8,7 @@ window.Hockey = window.Hockey || {};
   var Game = H.Game = {};
 
   var TitleBar          = Game.TitleBar          = document.getElementById("title-bar"),
+      Scoreboard        = Game.Scoreboard        = document.getElementById("scoreboard"),
       StartGame         = Game.StartGame         = document.getElementById("start-game"),
       GameContainer     = Game.GameContainer     = document.getElementById("game-container"),
       Pause             = Game.Pause             = document.getElementById("pause"),
@@ -30,6 +31,7 @@ window.Hockey = window.Hockey || {};
       if (!startGameIsHidden) {
         StartGame.classList.add("hidden");
         TitleBar.classList.remove("hidden");
+        Scoreboard.classList.remove("hidden");
         GameContainer.classList.remove("hidden");
         H.Animate.animate.call(window, H.Animate.step);
       } else if (pauseIsHidden && !gameResetting) {

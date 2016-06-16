@@ -11,8 +11,8 @@
         cursor: default;
       }
 
-      .title-bar {
-        display: hidden;
+      #title-bar {
+        color: purple;
       }
 
       .canvas-container {
@@ -27,14 +27,14 @@
       .player {
         float: left;
         font-size: 30px;
-        color: grey;
+        color: orange;
         font-style: italic;
       }
 
       .computer {
         float: right;
         font-size: 30px;
-        color: grey;
+        color: green;
         font-style: italic;
       }
 
@@ -73,7 +73,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        border: 1px solid blue;
+        /*border: 1px solid blue;*/
       }
 
       .controls tr {
@@ -107,7 +107,7 @@
       }
 
       div {
-        border: 1px dotted red;
+        /*border: 1px dotted red;*/
       }
     </style>
     <title>Fun Hockey!</title>
@@ -151,7 +151,7 @@
     </div>
 
     <div id="title-bar" class="container-center hidden">
-      <pre>
+      <pre class="fun-hockey">
         $$$$$$$$\                           $$\   $$\                     $$\                           $$\
         $$  _____|                          $$ |  $$ |                    $$ |                          $$ |
         $$ |      $$\   $$\ $$$$$$$\        $$ |  $$ | $$$$$$\   $$$$$$$\ $$ |  $$\  $$$$$$\  $$\   $$\ $$ |
@@ -166,7 +166,7 @@
       </pre>
     </div>
 
-    <div class="scoreboard">
+    <div id="scoreboard" class="hidden">
       <div class="player score">
         Player Score: <span id="player">0</span>
       </div>
