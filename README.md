@@ -2,6 +2,8 @@
 
 An Air Hockey inspired game where you control a striker in an attempt to score on an opponent by passing a puck past the opponent's striker and into their goal area.
 
+[Live Game](http://ismaelolea.tech/FunHockey/)
+
 **Instructions:**
 - **Arrow Keys:** ⬅️ ⬆️ ⬇️ ➡️
 
