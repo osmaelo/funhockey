@@ -2,118 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <style>
-      body {
-        background: Gainsboro;
-        font-family: sans-serif;
-        user-select: none;
-        -webkit-user-select: none;
-        cursor: default;
-      }
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/png" href="./images/puck.png">
 
-      #title-bar {
-        color: purple;
-      }
-
-      .canvas-container {
-        /*position: relative;*/
-        height: 100%;
-        /*width: 800px;*/
-        width: 100%;
-        text-align:center;
-        margin: auto;
-      }
-
-      .player {
-        float: left;
-        font-size: 30px;
-        color: orange;
-        font-style: italic;
-      }
-
-      .computer {
-        float: right;
-        font-size: 30px;
-        color: green;
-        font-style: italic;
-      }
-
-      .score {
-
-      }
-
-      .canvas {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #game-canvas {
-        border: 10px solid DimGrey;
-        /*This Defines the Corner Curvature Appearance, rinkRadius*/
-        /*border-radius: 75px;*/
-        border-radius: 15px;
-        display: inline;
-        margin: auto;
-      }
-
-      .modal {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        z-index: 20;
-      }
-
-      .container-center {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        /*border: 1px solid blue;*/
-      }
-
-      .controls tr {
-        border-bottom: 1px dotted #e6e6e6;
-      }
-      .controls tr:first-of-type {
-        border-top: 1px dotted #e6e6e6;
-      }
-      .controls td {
-        padding: 20px 10px;
-      }
-
-      .controls {
-        border-collapse: collapse;
-        padding: 10px;
-        text-align: center;
-        margin-bottom: 30px;
-      }
-
-      .instructions {
-        font-size: 20px;
-        font-style: italic;
-      }
-      .instructions strong {
-        font-size: 24px;
-        font-weight: 400;
-      }
-
-      .source {
-        font-size: 10px;
-      }
-
-      .hidden {
-        display: none;
-      }
-
-      div {
-        /*border: 1px dotted red;*/
-      }
-    </style>
     <title>Fun Hockey!</title>
   </head>
   <body>
@@ -155,29 +46,44 @@
     </div>
 
     <div id="title-bar" class="container-center hidden">
+
       <pre class="fun-hockey">
-        $$$$$$$$\                           $$\   $$\                     $$\                           $$\
-        $$  _____|                          $$ |  $$ |                    $$ |                          $$ |
-        $$ |      $$\   $$\ $$$$$$$\        $$ |  $$ | $$$$$$\   $$$$$$$\ $$ |  $$\  $$$$$$\  $$\   $$\ $$ |
-        $$$$$\    $$ |  $$ |$$  __$$\       $$$$$$$$ |$$  __$$\ $$  _____|$$ | $$  |$$  __$$\ $$ |  $$ |$$ |
-        $$  __|   $$ |  $$ |$$ |  $$ |      $$  __$$ |$$ /  $$ |$$ /      $$$$$$  / $$$$$$$$ |$$ |  $$ |\__|
-        $$ |      $$ |  $$ |$$ |  $$ |      $$ |  $$ |$$ |  $$ |$$ |      $$  _$$<  $$   ____|$$ |  $$ |
-        $$ |      \$$$$$$  |$$ |  $$ |      $$ |  $$ |\$$$$$$  |\$$$$$$$\ $$ | \$$\ \$$$$$$$\ \$$$$$$$ |$$\
-        \__|       \______/ \__|  \__|      \__|  \__| \______/  \_______|\__|  \__| \_______| \____$$ |\__|
-                                                                                              $$\   $$ |
-                                                                                              \$$$$$$  |
-                                                                                               \______/
+$$$$$$$$\                           $$\   $$\                     $$\                           $$\
+$$  _____|                          $$ |  $$ |                    $$ |                          $$ |
+$$ |      $$\   $$\ $$$$$$$\        $$ |  $$ | $$$$$$\   $$$$$$$\ $$ |  $$\  $$$$$$\  $$\   $$\ $$ |
+$$$$$\    $$ |  $$ |$$  __$$\       $$$$$$$$ |$$  __$$\ $$  _____|$$ | $$  |$$  __$$\ $$ |  $$ |$$ |
+$$  __|   $$ |  $$ |$$ |  $$ |      $$  __$$ |$$ /  $$ |$$ /      $$$$$$  / $$$$$$$$ |$$ |  $$ |\__|
+$$ |      $$ |  $$ |$$ |  $$ |      $$ |  $$ |$$ |  $$ |$$ |      $$  _$$<  $$   ____|$$ |  $$ |
+$$ |      \$$$$$$  |$$ |  $$ |      $$ |  $$ |\$$$$$$  |\$$$$$$$\ $$ | \$$\ \$$$$$$$\ \$$$$$$$ |$$\
+\__|       \______/ \__|  \__|      \__|  \__| \______/  \_______|\__|  \__| \_______| \____$$ |\__|
+                                                                                      $$\   $$ |
+                                                                                      \$$$$$$  |
+                                                                                       \______/
       </pre>
     </div>
 
-    <div id="scoreboard" class="hidden">
-      <div class="player score">
-        Player Score: <span id="player">0</span>
+    <div class="hp-container">
+      <div class="player-orange">
+        <img src="./images/playerLeftOr.png" alt="Orange Hockey Player" />
       </div>
-      <div class="computer score">
-        Computer Score: <span id="computer">0</span>
+      <div class="computer-green">
+        <img src="./images/playerRightGr.png" alt="Green Hockey Player" />
       </div>
     </div>
+
+
+    <div class="text-block">
+      <div id="scoreboard" class="hidden">
+        <div class="player score">
+          <p>Player Score: <span id="player">0</span></p>
+        </div>
+        <div class="computer score">
+          <p>Computer Score: <span id="computer">0</span></p>
+        </div>
+      </div>
+    </div>
+
+    <a class="source" href="https://github.com/osmaelo/FunHockey">GitHub</a>
 
     <div id="game-container" class="canvas-container hidden">
       <div class="canvas">
@@ -185,9 +91,17 @@
       </div>
     </div>
 
-    <div class="source">
-      <a href="https://github.com/osmaelo/FunHockey">GitHub</a>
+    <div class="hp-mascots">
+      <div class="mascot-green">
+        <img src="./images/realcomp.png" alt="Green Mascot" />
+        <!-- <img src="http://placehold.it/350x500" alt="Green Mascot" /> -->
+      </div>
+      <div class="mascot-orange">
+        <img src="./images/realplayer.png" alt="Orange Mascot" />
+        <!-- <img src="http://placehold.it/350x500" alt="Green Mascot" /> -->
+      </div>
     </div>
+
 
     <div id="goal-scored" class="modal hidden">
       <div class="container-center">
