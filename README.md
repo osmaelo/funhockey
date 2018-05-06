@@ -2,7 +2,7 @@
 
 An Air Hockey inspired game where you control a striker in an attempt to score on an opponent by passing a puck past the opponent's striker and into their goal area.
 
-[Live Game](http://ismaelolea.tech/funhockey/) (Currently Still Under Construction)
+*Live Game Link Here*
 
 **Instructions:**
 - **Arrow Keys:** ⬅️ ⬆️ ⬇️ ➡️
@@ -23,7 +23,7 @@ The Game's equipment include:
 * Score is kept for each player
 * 1 Point for each goal
 
-## Future Additions
+## Possible Future Additions
 - [ ] Keep Track of Auto-Goals, Change score by -1
 - [ ] Start & Stop & Pause Game, Instructions
 - [ ] Customization of Strikers, Board and Puck
